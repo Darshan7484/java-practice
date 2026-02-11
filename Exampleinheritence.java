@@ -36,3 +36,4 @@ public class Main1 {
         emp.getData();   
         emp.display();   
 }
+}
