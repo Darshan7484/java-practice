@@ -28,7 +28,7 @@ class Employee extends Person {
 }
 
 
-public class Main1 {
+public class Exampleinheritence {
     public static void main(String[] args) {
 
         Employee emp = new Employee(); 
