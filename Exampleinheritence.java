@@ -14,6 +14,7 @@ class Person {
 
         System.out.print("Enter Salary: ");
         salary = sc.nextDouble();
+        sc.close();
     }
 }
 
