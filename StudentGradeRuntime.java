@@ -8,7 +8,7 @@ public class StudentGradeRuntime {
         String[] names = new String[5];
         int[] marks = new int[5];
 
-        // Input names and marks
+        
         for(int i=0;i<5;i++) {
             System.out.print("Enter student name: ");
             names[i] = sc.next();
@@ -19,7 +19,7 @@ public class StudentGradeRuntime {
 
         System.out.println("\nStudent Details:");
 
-        // Display with grade
+       
         for(int i=0;i<5;i++) {
 
             char grade;
