@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-// Custom Exception class
+
 class InvalidLoginException extends Exception {
     public InvalidLoginException(String message) {
         super(message);
@@ -19,7 +19,6 @@ public class LoginValidationException {
             System.out.print("Enter password: ");
             String password = sc.nextLine();
 
-            // Check login
             if (!username.equals("admin") || !password.equals("1234")) {
                 throw new InvalidLoginException("Invalid Username or Password!");
             }
