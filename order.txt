@@ -1,0 +1,76 @@
+CREATE DATABASE Customer1;
+USE Customer1;
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    address VARCHAR(200)
+);
+
+CREATE TABLE Restaurant (
+    restaurant_id INT PRIMARY KEY AUTO_INCREMENT,
+    restaurant_name VARCHAR(100),
+    location VARCHAR(100),
+    phone VARCHAR(15)
+);
+
+CREATE TABLE Delivery_Person (
+    delivery_person_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    phone VARCHAR(15),
+    vehicle_number VARCHAR(20)
+);
+
+CREATE TABLE Food_Item (
+    food_id INT PRIMARY KEY AUTO_INCREMENT,
+    food_name VARCHAR(100),
+    price DECIMAL(10,2),
+    restaurant_id INT,
+    FOREIGN KEY (restaurant_id)
+    REFERENCES Restaurant(restaurant_id)
+);
+
+CREATE TABLE `Order` (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATETIME,
+    total_amount DECIMAL(10,2),
+    customer_id INT,
+    delivery_person_id INT,
+    FOREIGN KEY (customer_id)
+    REFERENCES Customer(customer_id),
+    FOREIGN KEY (delivery_person_id)
+    REFERENCES Delivery_Person(delivery_person_id)
+);
+
+CREATE TABLE Order_Item (
+    order_id INT,
+    food_id INT,
+    quantity INT,
+    subtotal DECIMAL(10,2),
+    PRIMARY KEY (order_id, food_id),
+    FOREIGN KEY (order_id)
+    REFERENCES `Order`(order_id),
+    FOREIGN KEY (food_id)
+    REFERENCES Food_Item(food_id)
+);
+
+SELECT order_id, order_date, total_amount
+FROM `Order`
+WHERE customer_id = 1;
+
+SELECT F.food_name, OI.quantity, OI.subtotal
+FROM Order_Item OI
+JOIN Food_Item F ON OI.food_id = F.food_id
+WHERE OI.order_id = 1;
+
+SELECT D.name, COUNT(O.order_id) AS total_orders
+FROM Delivery_Person D
+LEFT JOIN `Order` O ON D.delivery_person_id = O.delivery_person_id
+GROUP BY D.name;
+
+SELECT R.restaurant_name, SUM(OI.subtotal) AS total_revenue
+FROM Restaurant R
+JOIN Food_Item F ON R.restaurant_id = F.restaurant_id
+JOIN Order_Item OI ON F.food_id = OI.food_id
+GROUP BY R.restaurant_name;
