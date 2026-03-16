@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blog Website</title>
+
+<style>
+body{
+ font-family: Arial;
+ background:#f4f6f8;
+ margin:0;
+}
+
+header{
+ background:#222;
+ color:white;
+ padding:15px;
+ text-align:center;
+}
+
+.container{
+ width:80%;
+ margin:auto;
+}
+
+.blog{
+ background:white;
+ padding:15px;
+ margin:20px 0;
+ border-radius:10px;
+ box-shadow:0 0 5px #ccc;
+}
+
+button{
+ background:#007bff;
+ color:white;
+ border:none;
+ padding:8px 12px;
+ border-radius:5px;
+ cursor:pointer;
+}
+
+input,select{
+ padding:8px;
+ margin:10px;
+}
+</style>
+
+<script>
+
+// demo blogs (later backend will send this)
+let blogs=[
+ {id:1,title:"Java Basics",author:"Darshan",cat:"Tech",content:"Learn Java easily"},
+ {id:2,title:"Travel Mysore",author:"Admin",cat:"Travel",content:"Beautiful city"}
+];
+
+function loadBlogs(){
+
+ let search=document.getElementById("search").value.toLowerCase();
+ let cat=document.getElementById("category").value;
+
+ let output="";
+
+ blogs.forEach(b=>{
+
+  if(
+    (b.title.toLowerCase().includes(search)) &&
+    (cat=="All" || b.cat==cat)
+  ){
+
+   output+=`
+   <div class="blog">
+   <h2>${b.title}</h2>
+   <p>${b.content}</p>
+   <b>${b.author}</b> | ${b.cat}
+   <br><br>
+   <button onclick="view(${b.id})">Read More</button>
+   </div>`;
+  }
+
+ });
+
+ document.getElementById("blogs").innerHTML=output;
+}
+
+function view(id){
+ window.location="view.html?id="+id;
+}
+
+</script>
+
+</head>
+
+<body onload="loadBlogs()">
+
+<header>
+<h1>My Blog Website</h1>
+</header>
+
+<div class="container">
+
+Search:
+<input id="search" onkeyup="loadBlogs()">
+
+Category:
+<select id="category" onchange="loadBlogs()">
+<option>All</option>
+<option>Tech</option>
+<option>Travel</option>
+</select>
+
+<a href="admin.html">
+<button>Add Blog (Admin)</button>
+</a>
+
+<div id="blogs"></div>
+
+</div>
+</body>
+</html>
