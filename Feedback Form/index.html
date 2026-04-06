@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethnotech Academy - Internship Feedback Form</title>
+    
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f0f9ff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .feedback-wrapper {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* Header Section */
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* Main Form Card */
+        .form-container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        /* Form Sections */
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background: var(--primary-light);
+            border-radius: 2px;
+        }
+
+        /* Input Fields */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            background: #fff;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* Rating Section */
+        .rating-group {
+            margin-bottom: 28px;
+        }
+
+        .rating-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .stars {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .star-input {
+            display: none;
+        }
+
+        .star-label {
+            display: inline-flex;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .star-input:checked + .star-label {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        .star-label:hover {
+            border-color: var(--primary-light);
+            background: #e0f2fe;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-light);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .feedback-section label {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Submit Button */
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 64, 175, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d1fae5;
+            border: 2px solid var(--success);
+            color: #047857;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .form-container {
+                padding: 24px;
+            }
+
+            .form-header h1 {
+                font-size: 24px;
+            }
+
+            .stars {
+                gap: 6px;
+            }
+
+            .star-label {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        /* Accessibility */
+        .star-label:focus-visible {
+            outline: 2px solid var(--primary-light);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="feedback-wrapper">
+    <!-- Header -->
+    <div class="form-header">
+        <h1>📋 Internship Feedback Form</h1>
+        <p>Help us improve the Ethnotech Academy internship experience</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-container">
+        <form id="feedbackForm">
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                ✓ Thank you! Your feedback has been submitted successfully.
+            </div>
+
+            <!-- Personal Information Section -->
+            <div class="form-section">
+                <div class="section-title">Personal Information</div>
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Enter your full name" 
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email address" 
+                        required>
+                </div>
+            </div>
+
+            <!-- Ratings Section -->
+            <div class="form-section">
+                <div class="section-title">Program Ratings</div>
+
+                <!-- Teaching Quality Rating -->
+                <div class="rating-group">
+                    <label class="rating-label" for="teaching">How would you rate the Teaching Quality? *</label>
+                    <div class="stars" id="teaching-stars">
+                        <input type="radio" id="teaching1" name="teaching" value="1" class="star-input" required>
+                        <label for="teaching1" class="star-label">1</label>
+
+                        <input type="radio" id="teaching2" name="teaching" value="2" class="star-input">
+                        <label for="teaching2" class="star-label">2</label>
+
+                        <input type="radio" id="teaching3" name="teaching" value="3" class="star-input">
+                        <label for="teaching3" class="star-label">3</label>
+
+                        <input type="radio" id="teaching4" name="teaching" value="4" class="star-input">
+                        <label for="teaching4" class="star-label">4</label>
+
+                        <input type="radio" id="teaching5" name="teaching" value="5" class="star-input">
+                        <label for="teaching5" class="star-label">5</label>
+                    </div>
+                </div>
+
+                <!-- Practical Rating -->
+                <div class="rating-group">
+                    <label class="rating-label" for="practical">How would you rate the Practical Experience? *</label>
+                    <div class="stars" id="practical-stars">
+                        <input type="radio" id="practical1" name="practical" value="1" class="star-input" required>
+                        <label for="practical1" class="star-label">1</label>
+
+                        <input type="radio" id="practical2" name="practical" value="2" class="star-input">
+                        <label for="practical2" class="star-label">2</label>
+
+                        <input type="radio" id="practical3" name="practical" value="3" class="star-input">
+                        <label for="practical3" class="star-label">3</label>
+
+                        <input type="radio" id="practical4" name="practical" value="4" class="star-input">
+                        <label for="practical4" class="star-label">4</label>
+
+                        <input type="radio" id="practical5" name="practical" value="5" class="star-input">
+                        <label for="practical5" class="star-label">5</label>
+                    </div>
+                </div>
+
+                <!-- Environment Rating -->
+                <div class="rating-group">
+                    <label class="rating-label" for="environment">How would you rate the Learning Environment? *</label>
+                    <div class="stars" id="environment-stars">
+                        <input type="radio" id="environment1" name="environment" value="1" class="star-input" required>
+                        <label for="environment1" class="star-label">1</label>
+
+                        <input type="radio" id="environment2" name="environment" value="2" class="star-input">
+                        <label for="environment2" class="star-label">2</label>
+
+                        <input type="radio" id="environment3" name="environment" value="3" class="star-input">
+                        <label for="environment3" class="star-label">3</label>
+
+                        <input type="radio" id="environment4" name="environment" value="4" class="star-input">
+                        <label for="environment4" class="star-label">4</label>
+
+                        <input type="radio" id="environment5" name="environment" value="5" class="star-input">
+                        <label for="environment5" class="star-label">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Section -->
+            <div class="form-section">
+                <div class="feedback-section">
+                    <label for="feedback">Additional Feedback & Suggestions</label>
+                    <textarea 
+                        id="feedback" 
+                        name="feedback" 
+                        placeholder="Share your thoughts, suggestions, or areas for improvement..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('feedbackForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Collect form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            teachingQuality: document.querySelector('input[name="teaching"]:checked').value,
+            practicalExperience: document.querySelector('input[name="practical"]:checked').value,
+            learningEnvironment: document.querySelector('input[name="environment"]:checked').value,
+            feedback: document.getElementById('feedback').value
+        };
+
+        console.log('Feedback Submitted:', formData);
+
+        // Show success message
+        successMessage.classList.add('show');
+
+        // Reset form
+        form.reset();
+
+        // Hide success message after 4 seconds
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+        }, 4000);
+    });
+</script>
+
+</body>
+</html>
