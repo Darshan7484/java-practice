@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Counter</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0f172a;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #count {
+      font-size: 60px;
+      margin: 20px 0;
+      transition: color 0.3s ease, transform 0.2s;
+    }
+
+    /* Conditional colors */
+    .positive { color: #22c55e; }
+    .negative { color: #ef4444; }
+    .zero { color: #ffffff; }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .inc { background: #22c55e; color: white; }
+    .dec { background: #ef4444; color: white; }
+    .reset { background: #f59e0b; color: white; }
+
+    button:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Counter App</h1>
+    <div id="count" class="zero">0</div>
+
+    <div class="buttons">
+      <button class="dec" onclick="decrement()">-</button>
+      <button class="reset" onclick="reset()">Reset</button>
+      <button class="inc" onclick="increment()">+</button>
+    </div>
+  </div>
+
+  <script>
+    let count = 0;
+    const countEl = document.getElementById("count");
+
+    function updateUI() {
+      countEl.textContent = count;
+
+      // Remove all classes
+      countEl.classList.remove("positive", "negative", "zero");
+
+      // Conditional styling
+      if (count > 0) {
+        countEl.classList.add("positive");
+      } else if (count < 0) {
+        countEl.classList.add("negative");
+      } else {
+        countEl.classList.add("zero");
+      }
+
+      // Small animation
+      countEl.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        countEl.style.transform = "scale(1)";
+      }, 100);
+    }
+
+    function increment() {
+      count++;
+      updateUI();
+    }
+
+    function decrement() {
+      count--;
+      updateUI();
+    }
+
+    function reset() {
+      count = 0;
+      updateUI();
+    }
+  </script>
+
+</body>
+</html>

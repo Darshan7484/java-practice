@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pricing Cards</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      width: 250px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    /* Hover animation */
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    ul li {
+      margin: 8px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    /* Highlighted plan */
+    .featured {
+      transform: scale(1.1);
+      border: 2px solid #007bff;
+    }
+
+    .featured:hover {
+      transform: translateY(-10px) scale(1.15);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Basic -->
+    <div class="card">
+      <h2>Basic</h2>
+      <p class="price">$9/mo</p>
+      <ul>
+        <li>1 User</li>
+        <li>5 Projects</li>
+        <li>Email Support</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+    <!-- Standard (Highlighted) -->
+    <div class="card featured">
+      <h2>Standard</h2>
+      <p class="price">$19/mo</p>
+      <ul>
+        <li>5 Users</li>
+        <li>20 Projects</li>
+        <li>Priority Support</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+    <!-- Premium -->
+    <div class="card">
+      <h2>Premium</h2>
+      <p class="price">$29/mo</p>
+      <ul>
+        <li>Unlimited Users</li>
+        <li>Unlimited Projects</li>
+        <li>24/7 Support</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>World Clock</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .clock {
+      font-size: 45px;
+      margin: 15px 0;
+      letter-spacing: 2px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .zone {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌍 World Clock</h2>
+
+  <div class="clock" id="clock">00:00:00 AM</div>
+
+  <select id="timezone">
+    <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
+    <option value="America/New_York">🇺🇸 USA (New York)</option>
+    <option value="Europe/London">🇬🇧 UK (London)</option>
+    <option value="Asia/Tokyo">🇯🇵 Japan (Tokyo)</option>
+    <option value="Australia/Sydney">🇦🇺 Australia (Sydney)</option>
+  </select>
+
+  <div class="zone" id="zoneLabel">Asia/Kolkata</div>
+</div>
+
+<script>
+  const clock = document.getElementById("clock");
+  const timezoneSelect = document.getElementById("timezone");
+  const zoneLabel = document.getElementById("zoneLabel");
+
+  function updateClock() {
+    const timezone = timezoneSelect.value;
+
+    const now = new Date().toLocaleString("en-US", {
+      timeZone: timezone
+    });
+
+    const date = new Date(now);
+
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12 || 12;
+
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+
+    clock.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    zoneLabel.textContent = timezone;
+  }
+
+  timezoneSelect.addEventListener("change", updateClock);
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+</body>
+</html>
